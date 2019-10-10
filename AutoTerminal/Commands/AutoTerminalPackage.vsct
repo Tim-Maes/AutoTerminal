@@ -16,7 +16,7 @@
         <Parent guid="guidAutoTerminalPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>Invoke OpenTerminalCommand</ButtonText>
+          <ButtonText>Open terminal</ButtonText>
         </Strings>
       </Button>
     </Buttons>
