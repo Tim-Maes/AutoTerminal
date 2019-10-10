@@ -4,6 +4,7 @@
         <Identity Id="AutoTerminal.83387e40-8674-448f-b711-5005aeeda602" Version="1.0" Language="en-US" Publisher="Tim Maes" />
         <DisplayName>AutoTerminal</DisplayName>
         <Description xml:space="preserve">Easily open CMD from the solution explorer menu.</Description>
+        <MoreInfo>https://www.github.com/Tim-Maes/AutoTerminal</MoreInfo>
         <License>License\LICENSE.txt</License>
         <Icon>Resources\AutoTerminalIcon.png</Icon>
     </Metadata>
