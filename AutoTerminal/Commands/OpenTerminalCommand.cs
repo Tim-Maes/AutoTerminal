@@ -62,8 +62,8 @@ namespace AutoTerminal.Commands
                 WorkingDirectory = directory,
                 WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal,
                 FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                UseShellExecute = false
+                RedirectStandardInput = false,
+                UseShellExecute = false,
             };
 
             process.StartInfo = startInfo;
