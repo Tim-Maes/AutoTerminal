@@ -50,10 +50,9 @@ namespace AutoTerminal.Commands
             Instance = new OpenTerminalCommand(package, commandService);
         }
 
-        private void Execute(object sender, EventArgs e)
+        private string GetClickedFolderNodePath()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-
             IntPtr hierarchyPointer, selectionContainerPointer;
             IVsMultiItemSelect multiItemSelect;
             uint projectItemId;
@@ -73,9 +72,11 @@ namespace AutoTerminal.Commands
 
             selectedHierarchy.GetCanonicalName(projectItemId, out string folderPath);
 
-            var dte = Package.GetGlobalService(typeof(SDTE)) as DTE;
+            return Path.GetDirectoryName(folderPath).Replace("//", "/");
+        }
 
-            var directory = Path.GetDirectoryName(folderPath).Replace("//", "/");
+        private void StartProcess(string directory)
+        {
             var process = new System.Diagnostics.Process();
             var startInfo = new ProcessStartInfo
             {
@@ -89,6 +90,14 @@ namespace AutoTerminal.Commands
             process.StartInfo = startInfo;
             process.Start();
             process.WaitForExit();
+        }
+
+        private void Execute(object sender, EventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            var directory = GetClickedFolderNodePath();
+            StartProcess(directory);
         }
     }
 }
