@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using Task = System.Threading.Tasks.Task;
 
 namespace AutoTerminal.Commands
@@ -53,14 +54,36 @@ namespace AutoTerminal.Commands
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
+            IntPtr hierarchyPointer, selectionContainerPointer;
+            IVsMultiItemSelect multiItemSelect;
+            uint projectItemId;
+
+            IVsMonitorSelection monitorSelection =
+                    (IVsMonitorSelection)Package.GetGlobalService(
+                    typeof(SVsShellMonitorSelection));
+
+            monitorSelection.GetCurrentSelection(out hierarchyPointer,
+                                                 out projectItemId,
+                                                 out multiItemSelect,
+                                                 out selectionContainerPointer);
+
+
+
+
+            IVsHierarchy selectedHierarchy = Marshal.GetTypedObjectForIUnknown(
+                                                 hierarchyPointer,
+                                                 typeof(IVsHierarchy)) as IVsHierarchy;
+
+            selectedHierarchy.GetCanonicalName(projectItemId, out string folderPath);
+
             var dte = Package.GetGlobalService(typeof(SDTE)) as DTE;
-            var pathOfFile = dte.ActiveDocument.FullName;
-            var directory = Path.GetDirectoryName(pathOfFile).Replace("//", "/");
+
+            var directory = Path.GetDirectoryName(folderPath).Replace("//", "/");
             var process = new System.Diagnostics.Process();
             var startInfo = new ProcessStartInfo
             {
                 WorkingDirectory = directory,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal,
+                WindowStyle = ProcessWindowStyle.Normal,
                 FileName = "cmd.exe",
                 RedirectStandardInput = false,
                 UseShellExecute = false,
