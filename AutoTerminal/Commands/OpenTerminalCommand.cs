@@ -67,9 +67,6 @@ namespace AutoTerminal.Commands
                                                  out multiItemSelect,
                                                  out selectionContainerPointer);
 
-
-
-
             IVsHierarchy selectedHierarchy = Marshal.GetTypedObjectForIUnknown(
                                                  hierarchyPointer,
                                                  typeof(IVsHierarchy)) as IVsHierarchy;
