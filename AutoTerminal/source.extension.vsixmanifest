@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="AutoTerminal.83387e40-8674-448f-b711-5005aeeda602" Version="1.1" Language="en-US" Publisher="Tim Maes" />
+        <Identity Id="AutoTerminal.83387e40-8674-448f-b711-5005aeeda602" Version="1.1.2" Language="en-US" Publisher="Tim Maes" />
         <DisplayName>AutoTerminal</DisplayName>
         <Description xml:space="preserve">Easily open CMD from the folder context menu in solution explorer, in that directory.</Description>
         <MoreInfo>https://www.github.com/Tim-Maes/AutoTerminal</MoreInfo>

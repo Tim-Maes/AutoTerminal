@@ -89,7 +89,6 @@ namespace AutoTerminal.Commands
 
             process.StartInfo = startInfo;
             process.Start();
-            process.WaitForExit();
         }
 
         private void Execute(object sender, EventArgs e)
