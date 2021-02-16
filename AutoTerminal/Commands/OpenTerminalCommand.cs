@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Task = System.Threading.Tasks.Task;
 
@@ -77,10 +78,12 @@ namespace AutoTerminal.Commands
 
         private void StartProcess(string directory)
         {
+            string directoryWithCasing = FixPathCasing(directory);
+
             var process = new System.Diagnostics.Process();
             var startInfo = new ProcessStartInfo
             {
-                WorkingDirectory = directory,
+                WorkingDirectory = directoryWithCasing,
                 WindowStyle = ProcessWindowStyle.Normal,
                 FileName = "cmd.exe",
                 RedirectStandardInput = false,
@@ -97,6 +100,19 @@ namespace AutoTerminal.Commands
 
             var directory = GetClickedFolderNodePath();
             StartProcess(directory);
+        }
+
+        private static string FixPathCasing(string directoryWithoutCasing)
+        {
+            return directoryWithoutCasing
+                .Split(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar)
+                .Aggregate(string.Empty,
+                    (accum, element) =>
+                    {
+                        if (string.IsNullOrEmpty(accum))
+                            return element + System.IO.Path.DirectorySeparatorChar;
+                        return System.IO.Directory.GetFileSystemEntries(accum, element).First();
+                    });
         }
     }
 }
