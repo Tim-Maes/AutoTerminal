@@ -1,6 +1,6 @@
 # AutoTerminal
 
-VSIX extension to easily open the terminal from the solution explorer folder context menu, inside that directory. Only works on a folder node.
+Visual Studio extension to easily open the terminal from the solution explorer folder context menu, inside that directory. Only works on a folder node.
 
 ![AutoTerminal](https://i.imgur.com/kn7bEtZ.png)
 
